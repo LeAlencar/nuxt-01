@@ -7,6 +7,15 @@ import { Card,
   CardHeader,
   CardTitle} from '~/components/ui/card'
 const { data } = await useFetch('/api/products')
+
+async function submit() {
+  const { body } = await $fetch('/api/products', {
+    method: 'post',
+    body: { id: 145, name: 'Produto Novo', price: 10000 }
+  })
+  console.log(body)
+}
+
 </script>
 
 <template>
@@ -24,7 +33,10 @@ const { data } = await useFetch('/api/products')
           R$ {{ product.price / 100 }}
         </CardContent>
         <CardFooter>
-          <Button class="w-full">
+          <Button
+            class="w-full"
+            @click="submit"
+          >
             <Check class="mr-2 h-4 w-4" /> Mark all as read
           </Button>
         </CardFooter>
